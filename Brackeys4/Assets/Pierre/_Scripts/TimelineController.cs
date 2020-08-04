@@ -16,7 +16,7 @@ public class TimelineController : MonoBehaviour
     private NavMeshAgent nav;
     public List<PointOfInterest> locations = new List<PointOfInterest>();
     public float turnSpeed = 2;
-    private int locationIndex = 0;
+    private int locationIndex = 1;
     private int timeModifier = 1;
     private bool rewinding = false;
     private bool waiting = false;
@@ -109,7 +109,7 @@ public class TimelineController : MonoBehaviour
             anim.SetBool("Walking", false);
             state = CharacterState.Arrived;
         }
-        if(distance != Mathf.Infinity && rewinding && nav.remainingDistance <= .5)
+        if(distance != Mathf.Infinity && rewinding && nav.remainingDistance <= 1)
         {
             lookRotation = locations[locationIndex].lookRotation;
         }

@@ -8,7 +8,7 @@ Shader "Hidden/PostProcessing/FinalPass"
         #pragma vertex VertUVTransform
         #pragma fragment Frag
 
-        #include "../StdLib.hlsl"
+        #include "Packages/com.unity.postprocessing/PostProcessing/Shaders//StdLib.hlsl"
         #include "../Colors.hlsl"
         #include "Dithering.hlsl"
 
