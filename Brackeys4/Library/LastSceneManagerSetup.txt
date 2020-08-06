@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Pierre/Scenes/00_Menu.unity
+- path: Assets/Pierre/Scenes/TechDemo.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

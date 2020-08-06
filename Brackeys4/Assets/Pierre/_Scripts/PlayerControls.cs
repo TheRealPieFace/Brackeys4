@@ -10,6 +10,8 @@ public class PlayerControls : MonoBehaviour
     private bool rewind = false;
     [SerializeField] private float abberationIntensity = .5f;
     [SerializeField] private float abberationSpeed = .1f;
+    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private float turnSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +23,20 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
+        Rewind();
+    }
+
+    private void Movement()
+    {
+    }
+
+    private void Rewind()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var reversable = FindObjectsOfType<TimelineController>();
-            foreach(var character in reversable)
+            foreach (var character in reversable)
             {
                 rewind = true;
                 character.StartRewind();
@@ -41,14 +53,13 @@ public class PlayerControls : MonoBehaviour
             }
         }
 
-        if(rewind && abberation.intensity.value < abberationIntensity)
+        if (rewind && abberation.intensity.value < abberationIntensity)
         {
             abberation.intensity.value += Time.deltaTime * abberationSpeed;
-        } 
+        }
         else if (!rewind && abberation.intensity.value > 0)
         {
             abberation.intensity.value -= Time.deltaTime * abberationSpeed;
         }
-
     }
 }
