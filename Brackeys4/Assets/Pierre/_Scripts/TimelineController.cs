@@ -16,7 +16,7 @@ public class TimelineController : MonoBehaviour
     private NavMeshAgent nav;
     public List<PointOfInterest> locations = new List<PointOfInterest>();
     public float turnSpeed = 2;
-    private int locationIndex = 1;
+    [SerializeField] private int locationIndex = 1;
     private int timeModifier = 1;
     private bool rewinding = false;
     private bool waiting = false;
@@ -32,7 +32,7 @@ public class TimelineController : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         nav.updateRotation = false;
-        SetLookRotation(locations[0].transform.position);
+        SetLookRotation(locations[0].transform.position, transform.position);
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class TimelineController : MonoBehaviour
             if((!rewinding && timer >= locations[locationIndex].waitTime) || (rewinding && timer < 0))
             {
                 waiting = false;
-                if(locationIndex < locations.Count)
+                if(locationIndex < locations.Count - 1)
                 {
                     locationIndex += timeModifier;
                     if(locationIndex < 0)
@@ -78,13 +78,31 @@ public class TimelineController : MonoBehaviour
 
     private void GetLocation()
     {
+        if(rewinding && locationIndex == 0 && transform.position.x == locations[0].transform.position.x && transform.position.z == locations[0].transform.position.z)
+        {
+            return;
+        }
+
+        if(locationIndex == locations.Count - 1 && transform.position.x == locations[locations.Count - 1].transform.position.x && transform.position.z == locations[locations.Count - 1].transform.position.z)
+        {
+            return;
+        }
+
         if(locationIndex < locations.Count && locationIndex > -1)
         {
             if (locations[locationIndex].condition)
             {
                 if (!rewinding)
                 {
-                    SetLookRotation(locations[locationIndex].transform.position);
+                    SetLookRotation(locations[locationIndex].transform.position, transform.position);
+                }
+                else if(locationIndex < locations.Count)
+                {
+                    SetLookRotation(locations[locationIndex + 1].transform.position, locations[locationIndex].transform.position);
+                }
+                else if (locationIndex > 0)
+                {
+                    SetLookRotation(locations[locationIndex - 1].transform.position, locations[locationIndex].transform.position);
                 }
                 nav.SetDestination(locations[locationIndex].transform.position);
                 state = CharacterState.Walking;
@@ -105,11 +123,11 @@ public class TimelineController : MonoBehaviour
         float distance = nav.remainingDistance;
         if(distance != Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
         {
-            lookRotation = locations[locationIndex].lookRotation;
+            //lookRotation = locations[locationIndex].lookRotation;
             anim.SetBool("Walking", false);
             state = CharacterState.Arrived;
         }
-        if(distance != Mathf.Infinity && rewinding && nav.remainingDistance <= 1)
+        if (distance != Mathf.Infinity  && nav.remainingDistance <= 2)
         {
             lookRotation = locations[locationIndex].lookRotation;
         }
@@ -133,12 +151,13 @@ public class TimelineController : MonoBehaviour
             rewinding = true;
             timeModifier = -1;
             nav.ResetPath();
-            if (locationIndex > 0)
-            {
-                locationIndex -= 1;
-            }
+            
             if(state != CharacterState.Waiting)
             {
+                if (locationIndex > 0)
+                {
+                    locationIndex -= 1;
+                }
                 state = CharacterState.Idle;
             }
             anim.SetFloat("Time", timeModifier);
@@ -150,7 +169,6 @@ public class TimelineController : MonoBehaviour
         rewinding = false;
         timeModifier = 1;
         nav.ResetPath();
-        //nav.isStopped = true;
         if (state != CharacterState.Waiting)
         {
             state = CharacterState.Idle;
@@ -162,9 +180,9 @@ public class TimelineController : MonoBehaviour
         anim.SetFloat("Time", timeModifier);
     }
 
-    private void SetLookRotation(Vector3 target)
+    private void SetLookRotation(Vector3 target, Vector3 position)
     {
-        var lookDirection = (target - transform.position).normalized;
+        var lookDirection = (target - position).normalized;
         lookRotation = Quaternion.LookRotation(lookDirection);
     }
 

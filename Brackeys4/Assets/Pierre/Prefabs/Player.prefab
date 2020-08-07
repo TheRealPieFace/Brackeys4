@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4578983940535520403}
   - component: {fileID: 4578983940535520404}
   - component: {fileID: 4578983940535520405}
-  - component: {fileID: 4578983940535520406}
+  - component: {fileID: 7405466625287750518}
   - component: {fileID: 4578983940535520402}
   m_Layer: 10
   m_Name: Player
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4578983940535520406
-CapsuleCollider:
+--- !u!143 &7405466625287750518
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,9 +90,13 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  serializedVersion: 2
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4578983940535520402
 MonoBehaviour:
@@ -107,8 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcess: {fileID: 0}
-  abberationIntensity: 0.5
-  abberationSpeed: 0.1
+  abberationIntensity: 1
+  abberationSpeed: 1
+  movementSpeed: 4
+  turnSpeed: 0.1
+  controller: {fileID: 7405466625287750518}
 --- !u!1001 &1086701063627865706
 PrefabInstance:
   m_ObjectHideFlags: 0

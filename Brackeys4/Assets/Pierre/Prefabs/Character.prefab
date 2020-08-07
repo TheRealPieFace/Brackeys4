@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locations: []
   turnSpeed: 2
+  locationIndex: 0
 --- !u!1001 &7837197112089416553
 PrefabInstance:
   m_ObjectHideFlags: 0
