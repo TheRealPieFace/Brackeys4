@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Pierre/TechDemo.unity
+- path: Assets/Jean/Jeans Scene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
