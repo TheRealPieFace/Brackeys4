@@ -20,11 +20,14 @@ public class PlayerControls : MonoBehaviour
     public bool sitting = false;
     public bool canMove = true;
     private Transform preSit;
+    private CoffeeShopManager manager;
+    public bool hasWetFloorSign = false;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        manager = FindObjectOfType<CoffeeShopManager>();
         postProcess.profile.TryGetSettings(out abberation);
         anim = GetComponentInChildren<Animator>();
         Debug.Log(abberation != null);
@@ -33,6 +36,11 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            manager.TogglePath2();
+        }
+
         if (canMove)
         {
             Movement();
@@ -100,6 +108,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            manager.gameObject.GetComponent<AudioSource>().pitch = -1;
+            manager.rewinding = true;
             var reversable = FindObjectsOfType<TimelineController>();
             foreach (var character in reversable)
             {
@@ -110,6 +120,8 @@ public class PlayerControls : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            manager.gameObject.GetComponent<AudioSource>().pitch = 1;
+            manager.rewinding = false;
             var reversable = FindObjectsOfType<TimelineController>();
             foreach (var character in reversable)
             {

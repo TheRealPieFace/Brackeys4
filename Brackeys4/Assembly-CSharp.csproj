@@ -63,14 +63,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Chair.cs" />
+    <Compile Include="Assets\CheckPuddle.cs" />
+    <Compile Include="Assets\Fader.cs" />
+    <Compile Include="Assets\FirstEndScenario.cs" />
     <Compile Include="Assets\Pierre\_Scripts\BezierCurve\Path.cs" />
     <Compile Include="Assets\Pierre\_Scripts\BezierCurve\PathCreator.cs" />
+    <Compile Include="Assets\Pierre\_Scripts\Chair.cs" />
+    <Compile Include="Assets\Pierre\_Scripts\CoffeeShopManager.cs" />
+    <Compile Include="Assets\Pierre\_Scripts\GameManager.cs" />
+    <Compile Include="Assets\Pierre\_Scripts\PauseScript.cs" />
     <Compile Include="Assets\Pierre\_Scripts\PlayerControls.cs" />
     <Compile Include="Assets\Pierre\_Scripts\PointOfInterest.cs" />
+    <Compile Include="Assets\Pierre\_Scripts\SitScript.cs" />
     <Compile Include="Assets\Pierre\_Scripts\TimelineController.cs" />
+    <Compile Include="Assets\PuddleInteraction.cs" />
+    <Compile Include="Assets\WetFloorSign.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProBuilder">
       <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
@@ -114,6 +126,9 @@
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ProBuilder.AddOns.Editor">
       <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
@@ -128,12 +143,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>E:/Documents - DD/Unity Games/Brackeys4/Brackeys4/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
