@@ -15,7 +15,7 @@ Shader "Hidden/PostProcessing/DepthOfField"
                 #pragma target 3.5
                 #pragma vertex VertDefault
                 #pragma fragment FragCoC
-                #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/Builtins/DepthOfField.hlsl"
+                #include "DepthOfField.hlsl"
             ENDHLSL
         }
 

@@ -18,7 +18,7 @@ Shader "Hidden/PostProcessing/SubpixelMorphologicalAntialiasing"
                 #pragma vertex VertEdge
                 #pragma fragment FragEdge
                 #define SMAA_PRESET_LOW
-                #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/Builtins/SubpixelMorphologicalAntialiasingBridge.hlsl"
+                #include "SubpixelMorphologicalAntialiasingBridge.hlsl"
 
             ENDHLSL
         }

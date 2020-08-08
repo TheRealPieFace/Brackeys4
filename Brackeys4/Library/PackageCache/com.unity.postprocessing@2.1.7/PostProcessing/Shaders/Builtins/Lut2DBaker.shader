@@ -3,7 +3,7 @@ Shader "Hidden/PostProcessing/Lut2DBaker"
     HLSLINCLUDE
 
         #pragma target 3.0
-        #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
+        #include "../StdLib.hlsl"
         #include "../Colors.hlsl"
         #include "../ACES.hlsl"
 
