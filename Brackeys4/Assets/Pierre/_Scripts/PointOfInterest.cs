@@ -12,6 +12,7 @@ public class PointOfInterest : MonoBehaviour
     public Transform facePoint;
     private Vector3 lookDirection;
     public Quaternion lookRotation;
+    public GameObject owner;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,11 @@ public class PointOfInterest : MonoBehaviour
         lookRotation = Quaternion.LookRotation(lookDirection);
     }
 
-    public void Interact()
+    public void Interact(GameObject interactee)
     {
         if (interactable)
         {
+            owner = interactee;
             interacted = !interacted;
         }
     }
