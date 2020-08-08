@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Jean/Jeans Scene.unity
-=======
-- path: Assets/Pierre/Scenes/TechDemo.unity
->>>>>>> master
   isLoaded: 1
   isActive: 1
   isSubScene: 0

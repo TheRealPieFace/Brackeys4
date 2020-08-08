@@ -21,7 +21,7 @@ Shader "Hidden/PostProcessing/ScalableAO"
                 #pragma multi_compile _ APPLY_FORWARD_FOG
                 #pragma multi_compile _ FOG_LINEAR FOG_EXP FOG_EXP2
                 #define SOURCE_DEPTH
-                #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/Builtins/ScalableAO.hlsl"
+                #include "ScalableAO.hlsl"
 
             ENDHLSL
         }
