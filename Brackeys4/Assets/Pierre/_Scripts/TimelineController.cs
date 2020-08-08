@@ -19,7 +19,7 @@ public class TimelineController : MonoBehaviour
     public float movementSpeed = 2;
     [SerializeField] private int locationIndex = 0;
     private int timeModifier = 1;
-    private bool rewinding = false;
+    public bool rewinding = false;
     private bool waiting = false;
     private bool walking = false;
     public CharacterState state = CharacterState.Idle;
@@ -67,6 +67,10 @@ public class TimelineController : MonoBehaviour
                 waiting = false;
                 if(locationIndex < locations.Count - 1)
                 {
+                    if (rewinding && locations[locationIndex].GetComponent<PointOfInterest>().interacted)
+                    {
+                        locations[locationIndex].GetComponent<PointOfInterest>().interacted = false;
+                    }
                     locationIndex += timeModifier;
                     if(locationIndex < 0)
                     {
@@ -153,7 +157,11 @@ public class TimelineController : MonoBehaviour
     private void StartWait()
     {
         walking = false;
-        locations[locationIndex].Interact();
+        if (!rewinding)
+        {
+            locations[locationIndex].Interact(this.gameObject);
+        }
+        
         if (rewinding)
         {
             timer = locations[locationIndex].waitTime;
@@ -179,6 +187,12 @@ public class TimelineController : MonoBehaviour
                 }
                 state = CharacterState.Idle;
             }
+            else
+            {
+                
+            }
+
+
             anim.SetFloat("Time", timeModifier);
         }
     }
@@ -217,7 +231,6 @@ public class TimelineController : MonoBehaviour
     private void SetDestination(Vector3 target)
     {
         destination = new Vector3(target.x, transform.position.y, target.z);
-        Debug.Log($"{name} SetDestination {destination}");
         walking = true;
     }
 

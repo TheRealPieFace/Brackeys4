@@ -14,5 +14,13 @@ public class DestroyFloatingText : MonoBehaviour
         transform.localPosition += Offset;
     }
 
-  
+    private void Update()
+    {
+        if (this.gameObject.transform.eulerAngles.y != 0)
+        {
+            this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+    }
+
+
 }
