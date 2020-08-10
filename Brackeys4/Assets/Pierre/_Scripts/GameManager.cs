@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         cManager = FindObjectOfType<CoffeeShopManager>();
+        winScreem.GetComponent<Animator>().SetBool("End", false);
     }
 
     void Update()
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         paused = true;
         Time.timeScale = 0;
         pauseMenu.SetActive(true);
-        pauseMenu.GetComponent<Animation>().Play("PauseAnimation");
+        //pauseMenu.GetComponent<Animation>().Play("PauseAnimation");
     }
 
     public void Resume()
@@ -64,7 +65,8 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        var scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
     }
 
     public void End()
@@ -78,8 +80,8 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        Time.timeScale = 0;
-        winScreem.GetComponent<Animator>().SetTrigger("End");
+        //Time.timeScale = 0;
+        winScreem.GetComponent<Animator>().SetBool("End", true);
         credits.SetActive(true);
     }
 }

@@ -10,6 +10,7 @@ public class PuddleInteraction : MonoBehaviour
     private PlayerControls player;
     private PointOfInterest thisPoI;
     private GameManager manager;
+    public GameObject prompt;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +35,6 @@ public class PuddleInteraction : MonoBehaviour
             manager.totalFixes++;
         }
 
-        if (thisPoI.interacted)
-        {
-            manager.End();
-        }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,6 +44,7 @@ public class PuddleInteraction : MonoBehaviour
             if (other.GetComponent<PlayerControls>().hasWetFloorSign)
             {
                 interactable = true;
+                prompt.SetActive(true);
             }
         }
     }
@@ -57,6 +54,7 @@ public class PuddleInteraction : MonoBehaviour
         if (other.tag == "Player")
         {
             interactable = false;
+            prompt.SetActive(false);
         }
     }
 }

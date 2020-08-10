@@ -64,7 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CheckPuddle.cs" />
+    <Compile Include="Assets\CheckSeats.cs" />
+    <Compile Include="Assets\CoffeeSwitch.cs" />
     <Compile Include="Assets\Fader.cs" />
+    <Compile Include="Assets\FinalPosition.cs" />
     <Compile Include="Assets\FirstEndScenario.cs" />
     <Compile Include="Assets\FloatingText.cs" />
     <Compile Include="Assets\Jean\DestroyFloatingText.cs" />
@@ -83,9 +86,11 @@
     <Compile Include="Assets\Pierre\_Scripts\SitScript.cs" />
     <Compile Include="Assets\Pierre\_Scripts\TimelineController.cs" />
     <Compile Include="Assets\PlaceCoffee.cs" />
+    <Compile Include="Assets\PlaceCorrectCoffee.cs" />
     <Compile Include="Assets\PuddleInteraction.cs" />
     <Compile Include="Assets\TakeCoffee.cs" />
     <Compile Include="Assets\WetFloorSign.cs" />
+    <Compile Include="Assets\WrongOrder.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

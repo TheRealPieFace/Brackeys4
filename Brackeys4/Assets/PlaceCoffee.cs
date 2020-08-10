@@ -7,9 +7,11 @@ public class PlaceCoffee : MonoBehaviour
     public List<GameObject> mugs = new List<GameObject>();
     private PointOfInterest thisPoI;
     private bool active = false;
+    private CoffeeShopManager cManager;
 
     private void Start()
     {
+        cManager = FindObjectOfType<CoffeeShopManager>();
         thisPoI = GetComponent<PointOfInterest>();
     }
 
@@ -30,6 +32,7 @@ public class PlaceCoffee : MonoBehaviour
             {
                 mug.SetActive(false);
                 active = false;
+                cManager.mugSwitched = false;
             }
         }
     }

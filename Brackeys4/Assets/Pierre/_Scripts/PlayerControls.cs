@@ -30,17 +30,12 @@ public class PlayerControls : MonoBehaviour
         manager = FindObjectOfType<CoffeeShopManager>();
         postProcess.profile.TryGetSettings(out abberation);
         anim = GetComponentInChildren<Animator>();
-        Debug.Log(abberation != null);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            manager.TogglePath2();
-        }
-
         if (canMove)
         {
             Movement();
@@ -54,14 +49,16 @@ public class PlayerControls : MonoBehaviour
     {
         if(!sitting && canSit && chairInRange != null && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(chairInRange.GetComponentInParent<Chair>().transform.rotation.y);
             preSit = transform;
             transform.position = chairInRange.position;
             transform.eulerAngles = new Vector3(0, chairInRange.GetComponentInParent<Chair>().yRotation, 0);
-            Debug.Log(transform.localEulerAngles.y);
             canMove = false;
             anim.SetBool("Sit", true);
             sitting = true;
+            if (chairInRange.GetComponentInParent<Chair>().activation)
+            {
+                manager.sittingInSpot = true;
+            }
             
         }
         else if (sitting && Input.GetKeyDown(KeyCode.E))
@@ -72,6 +69,7 @@ public class PlayerControls : MonoBehaviour
             canMove = true;
             anim.SetBool("Sit", false);
             sitting = false;
+            manager.sittingInSpot = false;
         }
     }
 
@@ -146,6 +144,7 @@ public class PlayerControls : MonoBehaviour
         {
             canSit = true;
             chairInRange =  other.GetComponent<Chair>().sitPos;
+            other.GetComponent<Chair>().ShowPrompt();
         }
     }
 
@@ -154,6 +153,7 @@ public class PlayerControls : MonoBehaviour
         if (other.tag == "Chair")
         {
             canSit = false;
+            other.GetComponent<Chair>().HidePrompt();
         }
     }
 }

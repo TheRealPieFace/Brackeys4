@@ -34,102 +34,70 @@ public class TextBubble : MonoBehaviour
         if(timeline.rewinding && timeModifier == 1)
         {
             timeModifier = -1;
-            if(stringIndex == -1)
-            {
-                stringIndex = 0;
-            }
-            if (sentenceIndex == -1)
-            {
-                sentenceIndex = 0;
-            }
         }
         else if(!timeline.rewinding && timeModifier == -1)
         {
             timeModifier = 1;
-            if (stringIndex == sentences[sentenceIndex].Length)
-            {
-                stringIndex = sentences[sentenceIndex].Length - 1;
-            }
-            if (sentenceIndex == sentences.Count)
-            {
-                sentenceIndex = sentences.Count - 1;
-            }
+            wasRewinding = true;
         }
-        if (typing)
+
+        if (wasRewinding && stringIndex <= -1)
         {
-            //TypeForward();
+            stringIndex = 0;
+            wasRewinding = false;
         }
-        
+
+
+        if (typing && !timeline.rewinding && sentences.Count !=0)
+        {
+            TypeForward();
+        }
+        if(typing && timeline.rewinding && sentences.Count != 0)
+        {
+            TypeBackward();
+        }
 
     }
 
     private void TypeForward()
     {
-        timer += Time.deltaTime * timeModifier;
-        if (stringIndex == sentences[sentenceIndex].Length || stringIndex == -1)
+        timer += Time.deltaTime;
+        if(stringIndex == sentences[sentenceIndex].Length)
         {
-            if (timer >= sentenceLinger || timer <= 0)
+            if(timer >= sentenceLinger)
             {
-                if (sentenceIndex == sentences.Count - 1 || sentenceIndex == -1)
+                if(sentenceIndex == sentences.Count - 1)
                 {
-                    Destroy(gameObject.GetComponentInChildren<DestroyFloatingText>().gameObject);
+                    
                     timer = 0;
                     sentenceIndex = 0;
                     stringIndex = 0;
                     typing = false;
+                    sentences.Clear();
+                    Destroy(gameObject.GetComponentInChildren<DestroyFloatingText>().gameObject);
+                    
                 }
                 else
                 {
                     StartSentence();
-                    sentenceIndex += timeModifier;
-                    if (timeline.rewinding)
-                    {
-                        stringIndex = sentences[sentenceIndex].Length - 1;
-                        currentBubble.GetComponent<TextMesh>().text = sentences[sentenceIndex];
-                        timer = sentenceLinger;
-                    } 
-                    else
-                    {
-                        stringIndex = 0;
-                        timer = 0;
-                    }
+                    sentenceIndex++;
+                    timer = 0;
+                    stringIndex = 0;
                 }
             }
         }
         else
         {
-            if (timer >= textSpeed || (timeline.rewinding && timer <= 0))
+            if(timer >= textSpeed)
             {
-                if (timeline.rewinding)
-                {
-                    var newString = "";
-                    for (int i = 0; i < currentBubble.GetComponent<TextMesh>().text.Length - 1; i++)
-                    {
-                        if (i < currentBubble.GetComponent<TextMesh>().text.Length - 2)
-                        {
-                            newString += currentBubble.GetComponent<TextMesh>().text[i];
-                        }
-                    }
-                    currentBubble.GetComponent<TextMesh>().text = newString;
-                }
-                else
-                {
-                    currentBubble.GetComponent<TextMesh>().text += sentences[sentenceIndex][stringIndex];
-                }
-
-                stringIndex += timeModifier;
-
-                if (timeline.rewinding)
-                {
-                    timer = textSpeed;
-                }
-                else
-                {
-                    timer = 0;
-                }
+                currentBubble.GetComponent<TextMesh>().text += sentences[sentenceIndex][stringIndex];
+                stringIndex++;
+                timer = 0;
             }
         }
     }
+
+
 
     private void TypeBackward()
     {
@@ -140,11 +108,12 @@ public class TextBubble : MonoBehaviour
             {
                 if (sentenceIndex == 0)
                 {
-                    Destroy(gameObject.GetComponentInChildren<DestroyFloatingText>().gameObject);
                     timer = 0;
                     sentenceIndex = 0;
                     stringIndex = 0;
                     typing = false;
+                    sentences.Clear();
+                    Destroy(gameObject.GetComponentInChildren<DestroyFloatingText>().gameObject);
                 }
                 else
                 {
@@ -164,10 +133,7 @@ public class TextBubble : MonoBehaviour
                 var newString = "";
                 for(int i = 0; i < currentBubble.GetComponent<TextMesh>().text.Length - 1; i++)
                 {
-                    if(i < currentBubble.GetComponent<TextMesh>().text.Length - 2)
-                    {
-                        newString += currentBubble.GetComponent<TextMesh>().text[i];
-                    }
+                    newString += currentBubble.GetComponent<TextMesh>().text[i];
                 }
                 currentBubble.GetComponent<TextMesh>().text = newString;
                 stringIndex--;
@@ -188,10 +154,18 @@ public class TextBubble : MonoBehaviour
 
     public void ShowTextBubble(Dialogue dialogue)
     {
+        sentences.Clear();
         foreach (string sentence in dialogue.sentences)
         {
             sentences.Add(sentence);
         }
+        
+        if (timeline.rewinding)
+        {
+            sentenceIndex = sentences.Count;
+            stringIndex = sentences[sentenceIndex - 1].Length - 1;
+        }
+
         StartSentence();
         typing = true;
 

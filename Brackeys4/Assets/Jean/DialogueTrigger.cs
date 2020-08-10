@@ -7,6 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     private PointOfInterest thisPoI;
     private bool speaking = false;
+    public bool external = false;
 
     private void Start()
     {
@@ -15,12 +16,12 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (thisPoI.interacted && !speaking)
+        if (thisPoI.talking && !speaking && !external)
         {
             speaking = true;
             TriggerDialogue();
         }
-        if (speaking && !thisPoI.interacted)
+        if (speaking && !thisPoI.talking)
         {
             speaking = false;
         }

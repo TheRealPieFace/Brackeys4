@@ -6,6 +6,7 @@ public class PointOfInterest : MonoBehaviour
 {
     public bool interactable = false;
     public bool interacted = false;
+    public bool talking = false;
     public float waitTime = 0;
     //public List<TalkingEvents> dialogue;  // TODO
     public bool condition = true;

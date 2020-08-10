@@ -71,6 +71,7 @@ public class TimelineController : MonoBehaviour
                     {
                         locations[locationIndex].GetComponent<PointOfInterest>().interacted = false;
                     }
+                    locations[locationIndex].talking = false;
                     locationIndex += timeModifier;
                     if(locationIndex < 0)
                     {
@@ -157,6 +158,9 @@ public class TimelineController : MonoBehaviour
     private void StartWait()
     {
         walking = false;
+
+        locations[locationIndex].talking = true;
+
         if (!rewinding)
         {
             locations[locationIndex].Interact(this.gameObject);

@@ -6,6 +6,7 @@ public class WetFloorSign : MonoBehaviour
 {
     private bool interactable = false;
     private PlayerControls player;
+    public GameObject prompt;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class WetFloorSign : MonoBehaviour
         if (other.tag == "Player")
         {
             interactable = true;
+            prompt.SetActive(true);
         }
     }
 
@@ -38,6 +40,7 @@ public class WetFloorSign : MonoBehaviour
         if (other.tag == "Player")
         {
             interactable = false;
+            prompt.SetActive(false);
         }
     }
 }

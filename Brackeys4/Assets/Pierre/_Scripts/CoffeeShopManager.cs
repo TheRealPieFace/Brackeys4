@@ -27,6 +27,10 @@ public class CoffeeShopManager : MonoBehaviour
     public List<PointOfInterest> girlPath1 = new List<PointOfInterest>();
     public List<PointOfInterest> girlPath2 = new List<PointOfInterest>();
 
+    public bool path2 = false;
+    public bool mugSwitched = false;
+    public bool sittingInSpot = false;
+
     private void Start()
     {
         TogglePath1();
@@ -34,6 +38,7 @@ public class CoffeeShopManager : MonoBehaviour
 
     public void TogglePath1()
     {
+        path2 = false;
         if (barrista.GetComponent<TimelineController>().locations.Contains(barristaPath2[0]))
         {
             RemovePaths(barrista.GetComponent<TimelineController>(), barristaPath2);
@@ -52,6 +57,7 @@ public class CoffeeShopManager : MonoBehaviour
 
     public void TogglePath2()
     {
+        path2 = true;
         if (barrista.GetComponent<TimelineController>().locations.Contains(barristaPath1[0]))
         {
             RemovePaths(barrista.GetComponent<TimelineController>(), barristaPath1);
